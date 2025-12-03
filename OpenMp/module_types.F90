@@ -153,7 +153,7 @@ module module_types
     hv_coef = -hv_beta * dx / (16.0_wp*dt)
 
     call system_clock(tstart)
-    !$omp parallel do collapse(2) private(ll, s, stencil, vals, d3_vals, r, u, t, w)
+    !$omp parallel do collapse(2) private(ll, s, stencil, vals, d3_vals, r, u, t, w, p)
     do k = 1, nz
     !!! we have nx+1 because we have an extra face in x dirextion
       do i = 1, nx+1
