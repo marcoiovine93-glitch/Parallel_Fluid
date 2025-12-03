@@ -27,3 +27,4 @@ make
 
 #Run:
 srun ./model
+
