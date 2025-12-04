@@ -4,7 +4,7 @@ program atmosphere_model
   use module_physics, only : init, finalize
   use module_physics, only : rungekutta, total_mass_energy
   use module_output, only : create_output, write_record, close_output
-  use dimensions , only : sim_time, output_freq
+  use dimensions , only : nx, sim_time, output_freq, read_params !use  read_params to read the parametrs from the namelist file
   use iodir, only : stdout
   use module_types, only : t3, t4, t5, t6, t7, rate
   use module_physics, only : t8, t9
@@ -22,13 +22,17 @@ program atmosphere_model
   integer(8) :: t1, t2
   integer :: nthreads
 
+!call the read_params file(namelsit.in)
+
+     call read_params() 
   write(stdout, *) 'SIMPLE ATMOSPHERIC MODEL STARTING.'
+  call system_clock(t1)
   call init(etime,output_counter,dt)
   call total_mass_energy(mass0,te0)
   call create_output( )
   call write_record(oldstat,ref,etime)
 
-  call system_clock(t1)
+  !!!call system_clock(t1)
 
   ptime = int(sim_time/10.0)
   do while (etime < sim_time)
@@ -87,7 +91,13 @@ program atmosphere_model
   write(stdout,*) "xtend for flux"
   write(stdout,*) "TIME: ", t6
 
-  write(stdout,*) "update loop"
+  write(stdout,*) "update"
   write(stdout,*) "TIME: ", t7
+
+  write(stdout,*) "init"
+  write(stdout,*) "TIME: ", t8
+
+  write(stdout,*) "total_mass_energy"
+  write(stdout,*) "TIME: ", t9
 
 end program atmosphere_model
