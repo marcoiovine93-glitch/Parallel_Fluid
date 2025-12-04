@@ -60,7 +60,7 @@ module module_physics
     call oldstat%set_state(0.0_wp)
 
     call system_clock(tstart)
-    !$omp parallel do collapse(4)
+    !$omp parallel do collapse(2) private(kk, ii, x, z, r, u, w, t, hr, ht)
     !!! the two following loops identifies a cell in the grid, so we can collapse them, because every cell(i,k) is independant of others
     do k = 1-hs, nz+hs
       do i = 1-hs, nx+hs
