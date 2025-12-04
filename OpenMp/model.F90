@@ -1,3 +1,8 @@
+/**
+ * In the current file we added the proper timing variables to get the time for each loop and the changes required to get the 
+ * desired simulation parameters through the input file
+**/
+
 program atmosphere_model
   use calculation_types, only : wp
   use module_physics, only : dt, oldstat, newstat, flux, tend, ref
